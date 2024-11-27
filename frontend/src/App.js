@@ -65,12 +65,25 @@ function App() {
       .then((res) => res.json())
       .then((result) => setTodoItems(result.data));
   }, []);*/
-  useEffect(() => {
-    fetch('http://localhost:3010/api/todo-items')
-      .then((res) => res.json())
-      .then((result) => setTodoItems(result.data));
-  }, []);
  
+  useEffect(() => {
+    const fetchData = async () => {
+    try {
+    const res = await fetch('http://localhost:3010/api/todo-items');
+    if (!res.ok) {
+    throw new Error(`HTTP error! status: ${res.status}`);
+    }
+    const result = await res.json();
+    setTodoItems(result.data);
+    } catch (error) {
+    console.error("Error fetching data:", error.message);
+    }
+    };
+    
+    fetchData();
+    }, []);
+    
+
   return (
     <div>
       {todoItems.map((item) => (

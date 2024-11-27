@@ -16,7 +16,7 @@ app.use((req, res, next) => {
 });*/
 
 //Следующий код создает эндпоинт /api/todo-items. React приложение будет отправлять GET запрос на этот эндпоинт.
-const todoItems = require('./api/todo-items.json');
+const todoItems = require('./api/todo-items.json');//require('./api/todo-items.json');
 app.get('/api/todo-items', (req, res) => {
   res.json({ data: todoItems });
 });
